@@ -1,0 +1,1174 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yahya Tours — Website Proposal by Aql</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            playfair: ['"Playfair Display"', 'Georgia', 'serif'],
+            inter: ['Inter', 'system-ui', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background-color: #FDFAF4;
+      color: #1A3A5C;
+      overflow-x: hidden;
+    }
+    h1, h2, h3, h4, .f-playfair { font-family: 'Playfair Display', Georgia, serif; }
+
+    /* ── Hero background ─────────────────────────────── */
+    .hero-bg {
+      background-color: #0A1E35;
+      background-image:
+        radial-gradient(ellipse 80% 60% at 15% 60%, rgba(201,168,76,0.13) 0%, transparent 65%),
+        radial-gradient(ellipse 60% 50% at 85% 20%, rgba(26,58,92,0.7) 0%, transparent 65%),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='86' viewBox='0 0 100 86'%3E%3Cpolygon points='50,4 96,82 4,82' fill='none' stroke='%23C9A84C' stroke-opacity='0.055' stroke-width='1'/%3E%3C/svg%3E");
+    }
+
+    /* ── Scroll reveal ───────────────────────────────── */
+    .reveal        { opacity:0; transform:translateY(28px); transition:opacity .65s ease, transform .65s ease; }
+    .reveal-left   { opacity:0; transform:translateX(-28px); transition:opacity .65s ease, transform .65s ease; }
+    .reveal-right  { opacity:0; transform:translateX(28px);  transition:opacity .65s ease, transform .65s ease; }
+    .reveal.visible, .reveal-left.visible, .reveal-right.visible { opacity:1; transform:none; }
+
+    /* ── Scroll arrow bounce ─────────────────────────── */
+    @keyframes arrow-bounce {
+      0%,100% { transform:translateX(-50%) translateY(0); }
+      50%      { transform:translateX(-50%) translateY(10px); }
+    }
+    .scroll-arrow { animation: arrow-bounce 2.2s ease-in-out infinite; }
+
+    /* ── Gold gradient text ──────────────────────────── */
+    .gold-text {
+      background: linear-gradient(135deg, #F0D878 0%, #C9A84C 55%, #A88830 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ── Card lift ───────────────────────────────────── */
+    .card-lift { transition: transform .25s ease, box-shadow .25s ease; }
+    .card-lift:hover { transform:translateY(-4px); box-shadow:0 16px 40px rgba(201,168,76,.18); }
+
+    /* ── Timeline line ───────────────────────────────── */
+    .timeline-track::before {
+      content:'';
+      position:absolute;
+      left:23px; top:48px; bottom:0;
+      width:2px;
+      background:linear-gradient(to bottom,#C9A84C 0%,#1A3A5C 60%,transparent 100%);
+      opacity:.25;
+    }
+
+    /* ── Nav ─────────────────────────────────────────── */
+    #navbar { transition: background-color .3s ease, box-shadow .3s ease; }
+
+    /* ── Reduce motion ───────────────────────────────── */
+    @media (prefers-reduced-motion:reduce) {
+      .reveal, .reveal-left, .reveal-right { opacity:1; transform:none; transition:none; }
+      .scroll-arrow { animation:none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════
+     NAVBAR
+═══════════════════════════════════════════════════ -->
+<nav id="navbar" class="fixed top-0 left-0 right-0 z-50 px-5 py-4">
+  <div class="max-w-6xl mx-auto flex items-center justify-between">
+
+    <span class="font-playfair font-bold text-lg tracking-widest" style="color:#C9A84C;">AQL</span>
+
+    <!-- Desktop -->
+    <div class="hidden md:flex items-center gap-7 text-sm font-medium text-white/70">
+      <a href="#building"   class="hover:text-[#C9A84C] transition-colors cursor-pointer">Scope</a>
+      <a href="#features"   class="hover:text-[#C9A84C] transition-colors cursor-pointer">Features</a>
+      <a href="#stack"      class="hover:text-[#C9A84C] transition-colors cursor-pointer">Tech</a>
+      <a href="#phases"     class="hover:text-[#C9A84C] transition-colors cursor-pointer">Timeline</a>
+      <a href="#investment" class="hover:text-[#C9A84C] transition-colors cursor-pointer">Pricing</a>
+      <a href="#cta" class="ml-2 px-5 py-2 bg-[#C9A84C] hover:bg-[#a88830] text-white rounded-lg transition-colors cursor-pointer">Let's Talk</a>
+    </div>
+
+    <!-- Mobile hamburger -->
+    <button id="menu-btn" class="md:hidden text-white cursor-pointer" aria-label="Toggle menu">
+      <i data-lucide="menu" class="w-6 h-6"></i>
+    </button>
+  </div>
+
+  <!-- Mobile menu -->
+  <div id="mobile-menu" class="hidden md:hidden mt-3 bg-[#0A1E35]/96 backdrop-blur-md rounded-2xl p-5 border border-white/10">
+    <div class="flex flex-col gap-1 text-sm font-medium text-white/70">
+      <a href="#building"   class="py-2.5 px-3 rounded-lg hover:bg-white/5 hover:text-[#C9A84C] transition-all cursor-pointer">Scope</a>
+      <a href="#features"   class="py-2.5 px-3 rounded-lg hover:bg-white/5 hover:text-[#C9A84C] transition-all cursor-pointer">Features</a>
+      <a href="#stack"      class="py-2.5 px-3 rounded-lg hover:bg-white/5 hover:text-[#C9A84C] transition-all cursor-pointer">Tech Stack</a>
+      <a href="#phases"     class="py-2.5 px-3 rounded-lg hover:bg-white/5 hover:text-[#C9A84C] transition-all cursor-pointer">Timeline</a>
+      <a href="#investment" class="py-2.5 px-3 rounded-lg hover:bg-white/5 hover:text-[#C9A84C] transition-all cursor-pointer">Pricing</a>
+      <a href="#cta" class="mt-2 py-3 px-3 bg-[#C9A84C] text-white text-center rounded-xl font-semibold cursor-pointer">Let's Talk</a>
+    </div>
+  </div>
+</nav>
+
+
+<!-- ═══════════════════════════════════════════════════
+     HERO
+═══════════════════════════════════════════════════ -->
+<section id="hero" class="hero-bg min-h-screen flex flex-col items-center justify-center relative overflow-hidden px-6 pt-20">
+
+  <!-- Pyramid silhouette strip at the bottom -->
+  <div class="absolute bottom-0 left-0 right-0 pointer-events-none" aria-hidden="true">
+    <svg viewBox="0 0 1440 180" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full block" preserveAspectRatio="none">
+      <polygon points="0,180 220,50 440,180"   fill="#C9A84C" opacity="0.07"/>
+      <polygon points="320,180 680,10 1040,180" fill="#C9A84C" opacity="0.06"/>
+      <polygon points="900,180 1160,70 1420,180" fill="#C9A84C" opacity="0.07"/>
+    </svg>
+  </div>
+
+  <!-- Stars scatter (JS-painted) -->
+  <canvas id="stars" class="absolute inset-0 pointer-events-none" aria-hidden="true"></canvas>
+
+  <div class="relative z-10 text-center max-w-4xl mx-auto">
+
+    <!-- Pill label -->
+    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#C9A84C]/35 text-[#C9A84C] text-sm font-medium mb-10">
+      <i data-lucide="globe" class="w-3.5 h-3.5"></i>
+      Website Proposal &nbsp;·&nbsp; April 7, 2026
+    </div>
+
+    <!-- Title -->
+    <h1 class="font-playfair font-bold text-white leading-tight mb-3" style="font-size:clamp(2.8rem,8vw,5.5rem);">
+      Yahya Tours
+    </h1>
+
+    <!-- Gold rule + subtitle -->
+    <div class="flex items-center justify-center gap-4 mb-7">
+      <div class="h-px flex-1 max-w-[80px] bg-[#C9A84C]/40"></div>
+      <span class="font-playfair italic text-[#C9A84C]" style="font-size:clamp(1rem,3vw,1.4rem);">Website Proposal</span>
+      <div class="h-px flex-1 max-w-[80px] bg-[#C9A84C]/40"></div>
+    </div>
+
+    <p class="text-white/60 text-lg md:text-xl max-w-xl mx-auto leading-relaxed mb-10">
+      A world-class tourism platform built for Egypt's next great tour operator.
+    </p>
+
+    <!-- Meta row -->
+    <div class="flex flex-wrap items-center justify-center gap-4 md:gap-8 text-white/45 text-sm mb-12">
+      <span class="flex items-center gap-2"><i data-lucide="building-2" class="w-4 h-4 text-[#C9A84C]"></i>Prepared by <strong class="text-[#C9A84C] ml-1">Aql</strong></span>
+      <span class="hidden sm:block w-1 h-1 rounded-full bg-white/20"></span>
+      <span class="flex items-center gap-2"><i data-lucide="user" class="w-4 h-4 text-[#C9A84C]"></i>For <strong class="text-white/70 ml-1">Yahya</strong></span>
+      <span class="hidden sm:block w-1 h-1 rounded-full bg-white/20"></span>
+      <span class="flex items-center gap-2"><i data-lucide="calendar" class="w-4 h-4 text-[#C9A84C]"></i>April 7, 2026</span>
+    </div>
+
+    <!-- CTAs -->
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+      <a href="#building" class="cursor-pointer w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-4 bg-[#C9A84C] hover:bg-[#a88830] text-white font-semibold rounded-xl transition-colors">
+        <i data-lucide="file-text" class="w-5 h-5"></i>
+        View Full Proposal
+      </a>
+      <a href="#investment" class="cursor-pointer w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-4 border border-white/20 hover:border-[#C9A84C] text-white/70 hover:text-white font-medium rounded-xl transition-all">
+        <i data-lucide="banknote" class="w-5 h-5"></i>
+        See Pricing
+      </a>
+    </div>
+  </div>
+
+  <!-- Scroll arrow -->
+  <a href="#building" class="scroll-arrow absolute bottom-10 left-1/2 cursor-pointer" aria-label="Scroll down">
+    <i data-lucide="chevron-down" class="w-8 h-8 text-[#C9A84C]/70"></i>
+  </a>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════
+     WHAT WE'RE BUILDING
+═══════════════════════════════════════════════════ -->
+<section id="building" class="py-28 px-6 bg-[#FDFAF4]">
+  <div class="max-w-6xl mx-auto">
+
+    <div class="text-center mb-16 reveal">
+      <span class="inline-block px-4 py-1 rounded-full bg-[#F5E6C8] text-[#a88830] text-sm font-medium mb-4">Scope of Work</span>
+      <h2 class="font-playfair text-4xl md:text-5xl font-bold text-[#1A3A5C] mb-4">What We're Building</h2>
+      <p class="text-[#1A3A5C]/55 text-lg max-w-xl mx-auto">A complete, professional web presence — every page designed to turn visitors into bookings.</p>
+    </div>
+
+    <div id="cards-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      <!-- Card template: repeated 9 times -->
+      <div class="card-lift reveal bg-white rounded-2xl p-6 border border-[#F5E6C8] cursor-default">
+        <div class="w-11 h-11 rounded-xl bg-[#F5E6C8] flex items-center justify-center mb-4">
+          <i data-lucide="layout-template" class="w-5 h-5 text-[#C9A84C]"></i>
+        </div>
+        <h3 class="font-playfair font-semibold text-[#1A3A5C] text-lg mb-2">Hero Page</h3>
+        <p class="text-[#1A3A5C]/55 text-sm leading-relaxed">Full-screen Egypt visual, a powerful headline, and a "Book Now" button that captures attention from the first second.</p>
+      </div>
+
+      <div class="card-lift reveal bg-white rounded-2xl p-6 border border-[#F5E6C8] cursor-default">
+        <div class="w-11 h-11 rounded-xl bg-[#F5E6C8] flex items-center justify-center mb-4">
+          <i data-lucide="map" class="w-5 h-5 text-[#C9A84C]"></i>
+        </div>
+        <h3 class="font-playfair font-semibold text-[#1A3A5C] text-lg mb-2">Featured Tours</h3>
+        <p class="text-[#1A3A5C]/55 text-sm leading-relaxed">Showcase 3–6 signature tours as visual cards — cover photo, title, duration, price, and a "View Details" button.</p>
+      </div>
+
+      <div class="card-lift reveal bg-white rounded-2xl p-6 border border-[#F5E6C8] cursor-default">
+        <div class="w-11 h-11 rounded-xl bg-[#F5E6C8] flex items-center justify-center mb-4">
+          <i data-lucide="scroll-text" class="w-5 h-5 text-[#C9A84C]"></i>
+        </div>
+        <h3 class="font-playfair font-semibold text-[#1A3A5C] text-lg mb-2">Tour Detail Page</h3>
+        <p class="text-[#1A3A5C]/55 text-sm leading-relaxed">Dedicated page per tour: full itinerary, what's included/excluded, photo gallery, and an embedded booking form.</p>
+      </div>
+
+      <div class="card-lift reveal bg-white rounded-2xl p-6 border border-[#F5E6C8] cursor-default">
+        <div class="w-11 h-11 rounded-xl bg-[#F5E6C8] flex items-center justify-center mb-4">
+          <i data-lucide="calendar-check" class="w-5 h-5 text-[#C9A84C]"></i>
+        </div>
+        <h3 class="font-playfair font-semibold text-[#1A3A5C] text-lg mb-2">Online Booking Form</h3>
+        <p class="text-[#1A3A5C]/55 text-sm leading-relaxed">Name, email, WhatsApp, tour, date, group size — saved to the database and emailed to Yahya automatically on every submission.</p>
+      </div>
+
+      <div class="card-lift reveal bg-white rounded-2xl p-6 border border-[#F5E6C8] cursor-default">
+        <div class="w-11 h-11 rounded-xl bg-[#F5E6C8] flex items-center justify-center mb-4">
+          <i data-lucide="user-round" class="w-5 h-5 text-[#C9A84C]"></i>
+        </div>
+        <h3 class="font-playfair font-semibold text-[#1A3A5C] text-lg mb-2">About Yahya</h3>
+        <p class="text-[#1A3A5C]/55 text-sm leading-relaxed">Your story, experience, and vision — the trust-builder that turns curious visitors into confident, paying customers.</p>
+      </div>
+
+      <div class="card-lift reveal bg-white rounded-2xl p-6 border border-[#F5E6C8] cursor-default">
+        <div class="w-11 h-11 rounded-xl bg-[#F5E6C8] flex items-center justify-center mb-4">
+          <i data-lucide="image" class="w-5 h-5 text-[#C9A84C]"></i>
+        </div>
+        <h3 class="font-playfair font-semibold text-[#1A3A5C] text-lg mb-2">Photo Gallery</h3>
+        <p class="text-[#1A3A5C]/55 text-sm leading-relaxed">A visual grid of Egypt's landmarks and tour experiences — the most powerful sales tool there is.</p>
+      </div>
+
+      <div class="card-lift reveal bg-white rounded-2xl p-6 border border-[#F5E6C8] cursor-default">
+        <div class="w-11 h-11 rounded-xl bg-[#F5E6C8] flex items-center justify-center mb-4">
+          <i data-lucide="star" class="w-5 h-5 text-[#C9A84C]"></i>
+        </div>
+        <h3 class="font-playfair font-semibold text-[#1A3A5C] text-lg mb-2">Testimonials</h3>
+        <p class="text-[#1A3A5C]/55 text-sm leading-relaxed">Star-rated reviews from past tourists — the social proof that converts hesitant browsers into booked travelers.</p>
+      </div>
+
+      <div class="card-lift reveal bg-white rounded-2xl p-6 border border-[#F5E6C8] cursor-default">
+        <div class="w-11 h-11 rounded-xl bg-[#F5E6C8] flex items-center justify-center mb-4">
+          <i data-lucide="help-circle" class="w-5 h-5 text-[#C9A84C]"></i>
+        </div>
+        <h3 class="font-playfair font-semibold text-[#1A3A5C] text-lg mb-2">FAQ</h3>
+        <p class="text-[#1A3A5C]/55 text-sm leading-relaxed">Visa info, cancellations, what to pack — answers that remove booking objections automatically, 24/7.</p>
+      </div>
+
+      <div class="card-lift reveal bg-white rounded-2xl p-6 border border-[#F5E6C8] cursor-default">
+        <div class="w-11 h-11 rounded-xl bg-[#F5E6C8] flex items-center justify-center mb-4">
+          <i data-lucide="message-circle" class="w-5 h-5 text-[#C9A84C]"></i>
+        </div>
+        <h3 class="font-playfair font-semibold text-[#1A3A5C] text-lg mb-2">Contact</h3>
+        <p class="text-[#1A3A5C]/55 text-sm leading-relaxed">WhatsApp button, email, social links, contact form — every channel a tourist might prefer to reach you on.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════
+     FEATURES
+═══════════════════════════════════════════════════ -->
+<section id="features" class="py-28 px-6 bg-white">
+  <div class="max-w-5xl mx-auto">
+
+    <div class="text-center mb-16 reveal">
+      <span class="inline-block px-4 py-1 rounded-full bg-[#F5E6C8] text-[#a88830] text-sm font-medium mb-4">Functionality</span>
+      <h2 class="font-playfair text-4xl md:text-5xl font-bold text-[#1A3A5C] mb-4">Key Features</h2>
+      <p class="text-[#1A3A5C]/55 text-lg max-w-xl mx-auto">Built for two audiences — tourists get a seamless booking experience, you get total control.</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-8">
+
+      <!-- For Tourists -->
+      <div class="reveal-left bg-[#FDFAF4] rounded-2xl p-8 border border-[#F5E6C8]">
+        <div class="flex items-center gap-3 mb-7">
+          <div class="w-10 h-10 rounded-xl bg-[#1A3A5C] flex items-center justify-center">
+            <i data-lucide="plane" class="w-5 h-5 text-[#C9A84C]"></i>
+          </div>
+          <h3 class="font-playfair text-xl font-bold text-[#1A3A5C]">For Tourists</h3>
+        </div>
+        <ul class="space-y-4">
+          <li class="flex items-start gap-3">
+            <div class="mt-0.5 w-5 h-5 rounded-full bg-[#C9A84C] flex items-center justify-center flex-shrink-0">
+              <i data-lucide="check" class="w-3 h-3 text-white"></i>
+            </div>
+            <span class="text-[#1A3A5C]/70 text-sm leading-relaxed">Browse all tours with full photos, itineraries, and transparent pricing</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <div class="mt-0.5 w-5 h-5 rounded-full bg-[#C9A84C] flex items-center justify-center flex-shrink-0">
+              <i data-lucide="check" class="w-3 h-3 text-white"></i>
+            </div>
+            <span class="text-[#1A3A5C]/70 text-sm leading-relaxed">Book directly from the website — no need to DM or call first</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <div class="mt-0.5 w-5 h-5 rounded-full bg-[#C9A84C] flex items-center justify-center flex-shrink-0">
+              <i data-lucide="check" class="w-3 h-3 text-white"></i>
+            </div>
+            <span class="text-[#1A3A5C]/70 text-sm leading-relaxed">Receive an automatic email confirmation the moment they submit</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <div class="mt-0.5 w-5 h-5 rounded-full bg-[#C9A84C] flex items-center justify-center flex-shrink-0">
+              <i data-lucide="check" class="w-3 h-3 text-white"></i>
+            </div>
+            <span class="text-[#1A3A5C]/70 text-sm leading-relaxed">Read the complete itinerary and inclusions before committing</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <div class="mt-0.5 w-5 h-5 rounded-full bg-[#C9A84C] flex items-center justify-center flex-shrink-0">
+              <i data-lucide="check" class="w-3 h-3 text-white"></i>
+            </div>
+            <span class="text-[#1A3A5C]/70 text-sm leading-relaxed">Reach you instantly via a floating WhatsApp button on every page</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- For Yahya -->
+      <div class="reveal-right bg-[#1A3A5C] rounded-2xl p-8">
+        <div class="flex items-center gap-3 mb-7">
+          <div class="w-10 h-10 rounded-xl bg-[#C9A84C]/20 flex items-center justify-center">
+            <i data-lucide="settings" class="w-5 h-5 text-[#C9A84C]"></i>
+          </div>
+          <h3 class="font-playfair text-xl font-bold text-white">For You (Admin)</h3>
+        </div>
+        <ul class="space-y-4">
+          <li class="flex items-start gap-3">
+            <div class="mt-0.5 w-5 h-5 rounded-full bg-[#C9A84C] flex items-center justify-center flex-shrink-0">
+              <i data-lucide="check" class="w-3 h-3 text-[#1A3A5C]"></i>
+            </div>
+            <span class="text-white/65 text-sm leading-relaxed">Instant email alert every time a booking is submitted</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <div class="mt-0.5 w-5 h-5 rounded-full bg-[#C9A84C] flex items-center justify-center flex-shrink-0">
+              <i data-lucide="check" class="w-3 h-3 text-[#1A3A5C]"></i>
+            </div>
+            <span class="text-white/65 text-sm leading-relaxed">Simple admin dashboard to view and manage all reservations</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <div class="mt-0.5 w-5 h-5 rounded-full bg-[#C9A84C] flex items-center justify-center flex-shrink-0">
+              <i data-lucide="check" class="w-3 h-3 text-[#1A3A5C]"></i>
+            </div>
+            <span class="text-white/65 text-sm leading-relaxed">Add, edit, or remove tours and update pricing — no developer needed</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <div class="mt-0.5 w-5 h-5 rounded-full bg-[#C9A84C] flex items-center justify-center flex-shrink-0">
+              <i data-lucide="check" class="w-3 h-3 text-[#1A3A5C]"></i>
+            </div>
+            <span class="text-white/65 text-sm leading-relaxed">See which tours get the most views and bookings via analytics</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <div class="mt-0.5 w-5 h-5 rounded-full bg-[#C9A84C] flex items-center justify-center flex-shrink-0">
+              <i data-lucide="check" class="w-3 h-3 text-[#1A3A5C]"></i>
+            </div>
+            <span class="text-white/65 text-sm leading-relaxed">All bookings stored securely — name, contact, date, group size, notes</span>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════
+     DESIGN DIRECTION
+═══════════════════════════════════════════════════ -->
+<section id="design" class="py-28 px-6 bg-[#0A1E35]">
+  <div class="max-w-5xl mx-auto">
+
+    <div class="text-center mb-16 reveal">
+      <span class="inline-block px-4 py-1 rounded-full bg-[#C9A84C]/15 text-[#C9A84C] text-sm font-medium mb-4">Visual Identity</span>
+      <h2 class="font-playfair text-4xl md:text-5xl font-bold text-white mb-4">Design Direction</h2>
+      <p class="text-white/45 text-lg max-w-xl mx-auto">Your logo is the seed. We'll grow a full visual identity around it that positions Yahya Tours as Egypt's premium operator.</p>
+    </div>
+
+    <!-- Palette -->
+    <div class="reveal mb-16">
+      <p class="text-white/40 text-sm text-center uppercase tracking-widest font-medium mb-8">Egypt Color Palette</p>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-5">
+        <div class="text-center">
+          <div class="w-full aspect-square rounded-2xl mb-4 shadow-xl" style="background:#C9A84C;"></div>
+          <div class="text-white font-semibold text-sm">Desert Gold</div>
+          <div class="text-white/35 text-xs font-mono mt-0.5">#C9A84C</div>
+          <div class="text-white/30 text-xs mt-1">CTAs · Accents · Icons</div>
+        </div>
+        <div class="text-center">
+          <div class="w-full aspect-square rounded-2xl mb-4 shadow-xl" style="background:#1A3A5C;"></div>
+          <div class="text-white font-semibold text-sm">Nile Blue</div>
+          <div class="text-white/35 text-xs font-mono mt-0.5">#1A3A5C</div>
+          <div class="text-white/30 text-xs mt-1">Primary Text · Nav</div>
+        </div>
+        <div class="text-center">
+          <div class="w-full aspect-square rounded-2xl mb-4 shadow-xl" style="background:#F5E6C8;"></div>
+          <div class="text-white font-semibold text-sm">Warm Sand</div>
+          <div class="text-white/35 text-xs font-mono mt-0.5">#F5E6C8</div>
+          <div class="text-white/30 text-xs mt-1">Cards · Borders · Tags</div>
+        </div>
+        <div class="text-center">
+          <div class="w-full aspect-square rounded-2xl mb-4 shadow-xl border border-white/10" style="background:#FDFAF4;"></div>
+          <div class="text-white font-semibold text-sm">Ivory Cream</div>
+          <div class="text-white/35 text-xs font-mono mt-0.5">#FDFAF4</div>
+          <div class="text-white/30 text-xs mt-1">Page Background</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Principles -->
+    <div class="grid md:grid-cols-3 gap-5">
+      <div class="card-lift reveal bg-white/5 rounded-2xl p-6 border border-white/8 cursor-default">
+        <div class="w-10 h-10 rounded-xl bg-[#C9A84C]/15 flex items-center justify-center mb-4">
+          <i data-lucide="smartphone" class="w-5 h-5 text-[#C9A84C]"></i>
+        </div>
+        <h4 class="font-playfair text-lg font-semibold text-white mb-2">Mobile-First</h4>
+        <p class="text-white/45 text-sm leading-relaxed">Built from the phone screen up. The majority of international tourists browse and book on mobile — your site will look perfect on every device.</p>
+      </div>
+      <div class="card-lift reveal bg-white/5 rounded-2xl p-6 border border-white/8 cursor-default">
+        <div class="w-10 h-10 rounded-xl bg-[#C9A84C]/15 flex items-center justify-center mb-4">
+          <i data-lucide="camera" class="w-5 h-5 text-[#C9A84C]"></i>
+        </div>
+        <h4 class="font-playfair text-lg font-semibold text-white mb-2">Immersive Photography</h4>
+        <p class="text-white/45 text-sm leading-relaxed">Full-screen imagery of Egypt's most iconic landmarks. Photos do the selling — we design the layout to let them breathe and captivate.</p>
+      </div>
+      <div class="card-lift reveal bg-white/5 rounded-2xl p-6 border border-white/8 cursor-default">
+        <div class="w-10 h-10 rounded-xl bg-[#C9A84C]/15 flex items-center justify-center mb-4">
+          <i data-lucide="gem" class="w-5 h-5 text-[#C9A84C]"></i>
+        </div>
+        <h4 class="font-playfair text-lg font-semibold text-white mb-2">Premium Positioning</h4>
+        <p class="text-white/45 text-sm leading-relaxed">Clean, uncluttered layout designed to attract mid-to-high-end travelers. The design itself signals quality before a single word is read.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════
+     TECH STACK
+═══════════════════════════════════════════════════ -->
+<section id="stack" class="py-28 px-6 bg-[#FDFAF4]">
+  <div class="max-w-5xl mx-auto">
+
+    <div class="text-center mb-16 reveal">
+      <span class="inline-block px-4 py-1 rounded-full bg-[#F5E6C8] text-[#a88830] text-sm font-medium mb-4">Technology</span>
+      <h2 class="font-playfair text-4xl md:text-5xl font-bold text-[#1A3A5C] mb-4">Tech Stack</h2>
+      <p class="text-[#1A3A5C]/55 text-lg max-w-xl mx-auto">Every tool chosen for a reason — modern, scalable, and built to grow with your business.</p>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+
+      <!-- Next.js -->
+      <div class="card-lift reveal bg-white rounded-2xl p-6 border border-[#F5E6C8] cursor-default">
+        <div class="flex items-center gap-3 mb-3">
+          <div class="w-10 h-10 rounded-xl bg-black flex items-center justify-center flex-shrink-0">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="white" aria-hidden="true"><path d="M11.572 0c-.176 0-.31.001-.358.007a19.76 19.76 0 0 1-.364.033C7.443.346 4.25 2.185 2.228 5.012a11.875 11.875 0 0 0-2.119 5.243c-.096.659-.108.854-.108 1.747s.012 1.089.108 1.748c.652 4.506 3.86 8.292 8.209 9.695.779.25 1.6.422 2.534.525.363.04 1.935.04 2.299 0 1.611-.178 2.977-.577 4.323-1.264.207-.106.247-.134.219-.158-.02-.013-.9-1.193-1.955-2.62l-1.919-2.592-2.404-3.558a338.739 338.739 0 0 0-2.422-3.556c-.009-.002-.018 1.579-.023 3.51-.007 3.38-.01 3.515-.052 3.595a.426.426 0 0 1-.206.214c-.075.037-.14.044-.495.044H7.81l-.108-.068a.438.438 0 0 1-.157-.171l-.05-.106.006-4.703.007-4.705.072-.092a.645.645 0 0 1 .174-.143c.096-.047.134-.051.54-.051.478 0 .558.018.682.154.035.038 1.337 1.999 2.895 4.361a10760.433 10760.433 0 0 0 4.735 7.17l1.9 2.879.096-.063a12.317 12.317 0 0 0 2.466-2.163 11.944 11.944 0 0 0 2.824-6.134c.096-.66.108-.854.108-1.748 0-.893-.012-1.088-.108-1.747-.652-4.506-3.859-8.292-8.208-9.695a12.597 12.597 0 0 0-2.499-.523A33.119 33.119 0 0 0 11.573 0z"/></svg>
+          </div>
+          <div>
+            <div class="font-semibold text-[#1A3A5C] text-sm">Next.js 14</div>
+            <div class="text-[#1A3A5C]/40 text-xs">Frontend Framework</div>
+          </div>
+        </div>
+        <p class="text-[#1A3A5C]/55 text-sm leading-relaxed">Fast, SEO-friendly React framework. Every tour gets its own Google-indexable URL — tourists searching for Egypt tours will find you.</p>
+      </div>
+
+      <!-- Tailwind -->
+      <div class="card-lift reveal bg-white rounded-2xl p-6 border border-[#F5E6C8] cursor-default">
+        <div class="flex items-center gap-3 mb-3">
+          <div class="w-10 h-10 rounded-xl bg-[#0EA5E9] flex items-center justify-center flex-shrink-0">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="white" aria-hidden="true"><path d="M12.001 4.8c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624C13.666 10.618 15.027 12 18.001 12c3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C16.337 6.182 14.976 4.8 12.001 4.8zm-6 7.2c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624 1.177 1.194 2.538 2.576 5.512 2.576 3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C10.337 13.382 8.976 12 6.001 12z"/></svg>
+          </div>
+          <div>
+            <div class="font-semibold text-[#1A3A5C] text-sm">Tailwind CSS</div>
+            <div class="text-[#1A3A5C]/40 text-xs">Styling System</div>
+          </div>
+        </div>
+        <p class="text-[#1A3A5C]/55 text-sm leading-relaxed">Utility-first CSS that builds consistent, professional designs rapidly with a pixel-perfect result on every screen size.</p>
+      </div>
+
+      <!-- Supabase -->
+      <div class="card-lift reveal bg-white rounded-2xl p-6 border border-[#F5E6C8] cursor-default">
+        <div class="flex items-center gap-3 mb-3">
+          <div class="w-10 h-10 rounded-xl bg-[#3ECF8E] flex items-center justify-center flex-shrink-0">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="white" aria-hidden="true"><path d="M11.9 1.036c-.015-.986-1.26-1.41-1.874-.637L.764 12.05C.101 12.911.235 13.75.5 14.16c.264.41.737.84 1.93.84h6.646l-1.001 8.086c.015.986 1.26 1.41 1.874.637l9.262-11.653c.663-.861.529-1.7.264-2.11-.264-.41-.737-.84-1.93-.84h-6.646l1.001-8.085z"/></svg>
+          </div>
+          <div>
+            <div class="font-semibold text-[#1A3A5C] text-sm">Supabase</div>
+            <div class="text-[#1A3A5C]/40 text-xs">Database & Backend</div>
+          </div>
+        </div>
+        <p class="text-[#1A3A5C]/55 text-sm leading-relaxed">Stores all bookings and tour content securely. Also powers the admin dashboard where you manage everything — no coding needed.</p>
+      </div>
+
+      <!-- Resend -->
+      <div class="card-lift reveal bg-white rounded-2xl p-6 border border-[#F5E6C8] cursor-default">
+        <div class="flex items-center gap-3 mb-3">
+          <div class="w-10 h-10 rounded-xl bg-[#111] flex items-center justify-center flex-shrink-0">
+            <i data-lucide="send" class="w-4 h-4 text-white"></i>
+          </div>
+          <div>
+            <div class="font-semibold text-[#1A3A5C] text-sm">Resend</div>
+            <div class="text-[#1A3A5C]/40 text-xs">Email Delivery</div>
+          </div>
+        </div>
+        <p class="text-[#1A3A5C]/55 text-sm leading-relaxed">Beautiful confirmation emails to tourists + instant booking alerts to your inbox — automatically on every submission, zero effort from you.</p>
+      </div>
+
+      <!-- Cloudinary -->
+      <div class="card-lift reveal bg-white rounded-2xl p-6 border border-[#F5E6C8] cursor-default">
+        <div class="flex items-center gap-3 mb-3">
+          <div class="w-10 h-10 rounded-xl bg-[#3448C5] flex items-center justify-center flex-shrink-0">
+            <i data-lucide="cloud" class="w-4 h-4 text-white"></i>
+          </div>
+          <div>
+            <div class="font-semibold text-[#1A3A5C] text-sm">Cloudinary</div>
+            <div class="text-[#1A3A5C]/40 text-xs">Image Hosting</div>
+          </div>
+        </div>
+        <p class="text-[#1A3A5C]/55 text-sm leading-relaxed">Globally optimized image delivery. Egypt's stunning photos load instantly on every device and connection speed — no tourist waits.</p>
+      </div>
+
+      <!-- Vercel -->
+      <div class="card-lift reveal bg-white rounded-2xl p-6 border border-[#F5E6C8] cursor-default">
+        <div class="flex items-center gap-3 mb-3">
+          <div class="w-10 h-10 rounded-xl bg-[#111] flex items-center justify-center flex-shrink-0">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="white" aria-hidden="true"><path d="M24 22.525H0l12-21.05 12 21.05z"/></svg>
+          </div>
+          <div>
+            <div class="font-semibold text-[#1A3A5C] text-sm">Vercel</div>
+            <div class="text-[#1A3A5C]/40 text-xs">Deployment & Hosting</div>
+          </div>
+        </div>
+        <p class="text-[#1A3A5C]/55 text-sm leading-relaxed">Instant global deployment with automatic updates. No server to maintain, no downtime — the site just works, always.</p>
+      </div>
+
+    </div>
+
+    <p class="text-center text-[#1A3A5C]/40 text-sm mt-8 reveal flex items-center justify-center gap-2">
+      <i data-lucide="info" class="w-4 h-4 text-[#C9A84C]"></i>
+      Built to scale — online payments, Arabic, or a blog can be added later without rebuilding from scratch.
+    </p>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════
+     PHASES OF WORK
+═══════════════════════════════════════════════════ -->
+<section id="phases" class="py-28 px-6 bg-white">
+  <div class="max-w-3xl mx-auto">
+
+    <div class="text-center mb-16 reveal">
+      <span class="inline-block px-4 py-1 rounded-full bg-[#F5E6C8] text-[#a88830] text-sm font-medium mb-4">Roadmap</span>
+      <h2 class="font-playfair text-4xl md:text-5xl font-bold text-[#1A3A5C] mb-4">Phases of Work</h2>
+      <p class="text-[#1A3A5C]/55 text-lg max-w-xl mx-auto">Three focused phases from first pixel to full launch — structured so you see real progress at every step.</p>
+    </div>
+
+    <div class="relative timeline-track pl-16 space-y-8">
+
+      <!-- Phase 1 -->
+      <div class="relative reveal">
+        <div class="absolute -left-16 w-12 h-12 rounded-full bg-[#C9A84C] flex items-center justify-center shadow-lg z-10">
+          <span class="text-white font-bold text-sm font-playfair">1</span>
+        </div>
+        <div class="bg-[#FDFAF4] rounded-2xl p-7 border border-[#F5E6C8]">
+          <span class="text-xs font-semibold text-[#C9A84C] bg-[#C9A84C]/10 px-2.5 py-1 rounded-full">Phase 1</span>
+          <h3 class="font-playfair text-xl font-bold text-[#1A3A5C] mt-3 mb-4">Foundation</h3>
+          <ul class="space-y-2.5">
+            <li class="flex items-center gap-2.5 text-sm text-[#1A3A5C]/65">
+              <i data-lucide="check-circle" class="w-4 h-4 text-[#C9A84C] flex-shrink-0"></i>
+              Project setup and Egypt-inspired design system built from your logo
+            </li>
+            <li class="flex items-center gap-2.5 text-sm text-[#1A3A5C]/65">
+              <i data-lucide="check-circle" class="w-4 h-4 text-[#C9A84C] flex-shrink-0"></i>
+              Home page: hero, featured tours, testimonials, and footer
+            </li>
+            <li class="flex items-center gap-2.5 text-sm text-[#1A3A5C]/65">
+              <i data-lucide="check-circle" class="w-4 h-4 text-[#C9A84C] flex-shrink-0"></i>
+              Domain connection — site goes live for the first time
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Phase 2 -->
+      <div class="relative reveal">
+        <div class="absolute -left-16 w-12 h-12 rounded-full bg-[#1A3A5C] flex items-center justify-center shadow-lg z-10">
+          <span class="text-white font-bold text-sm font-playfair">2</span>
+        </div>
+        <div class="bg-[#1A3A5C] rounded-2xl p-7">
+          <span class="text-xs font-semibold text-[#C9A84C] bg-[#C9A84C]/15 px-2.5 py-1 rounded-full">Phase 2</span>
+          <h3 class="font-playfair text-xl font-bold text-white mt-3 mb-4">Tours &amp; Booking System</h3>
+          <ul class="space-y-2.5">
+            <li class="flex items-center gap-2.5 text-sm text-white/60">
+              <i data-lucide="check-circle" class="w-4 h-4 text-[#C9A84C] flex-shrink-0"></i>
+              Tour listing page and individual tour detail pages
+            </li>
+            <li class="flex items-center gap-2.5 text-sm text-white/60">
+              <i data-lucide="check-circle" class="w-4 h-4 text-[#C9A84C] flex-shrink-0"></i>
+              Booking form with database storage and automatic email alerts
+            </li>
+            <li class="flex items-center gap-2.5 text-sm text-white/60">
+              <i data-lucide="check-circle" class="w-4 h-4 text-[#C9A84C] flex-shrink-0"></i>
+              Your admin dashboard — view and manage all reservations in one place
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Phase 3 -->
+      <div class="relative reveal">
+        <div class="absolute -left-16 w-12 h-12 rounded-full bg-[#C9A84C] flex items-center justify-center shadow-lg z-10">
+          <span class="text-white font-bold text-sm font-playfair">3</span>
+        </div>
+        <div class="bg-[#FDFAF4] rounded-2xl p-7 border border-[#F5E6C8]">
+          <span class="text-xs font-semibold text-[#C9A84C] bg-[#C9A84C]/10 px-2.5 py-1 rounded-full">Phase 3</span>
+          <h3 class="font-playfair text-xl font-bold text-[#1A3A5C] mt-3 mb-4">Polish &amp; Launch</h3>
+          <ul class="space-y-2.5">
+            <li class="flex items-center gap-2.5 text-sm text-[#1A3A5C]/65">
+              <i data-lucide="check-circle" class="w-4 h-4 text-[#C9A84C] flex-shrink-0"></i>
+              Gallery, FAQ, About, and Contact sections
+            </li>
+            <li class="flex items-center gap-2.5 text-sm text-[#1A3A5C]/65">
+              <i data-lucide="check-circle" class="w-4 h-4 text-[#C9A84C] flex-shrink-0"></i>
+              Full mobile responsiveness audit across every page
+            </li>
+            <li class="flex items-center gap-2.5 text-sm text-[#1A3A5C]/65">
+              <i data-lucide="check-circle" class="w-4 h-4 text-[#C9A84C] flex-shrink-0"></i>
+              SEO setup: meta tags, sitemap, Google indexing
+            </li>
+            <li class="flex items-center gap-2.5 text-sm text-[#1A3A5C]/65">
+              <i data-lucide="check-circle" class="w-4 h-4 text-[#C9A84C] flex-shrink-0"></i>
+              Final review with Yahya — then we go live
+            </li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════
+     WHAT WE NEED FROM YOU
+═══════════════════════════════════════════════════ -->
+<section id="needs" class="py-28 px-6 bg-[#F5E6C8]/25">
+  <div class="max-w-4xl mx-auto">
+
+    <div class="text-center mb-16 reveal">
+      <span class="inline-block px-4 py-1 rounded-full bg-[#F5E6C8] text-[#a88830] text-sm font-medium mb-4">To Get Started</span>
+      <h2 class="font-playfair text-4xl md:text-5xl font-bold text-[#1A3A5C] mb-4">What We Need From You</h2>
+      <p class="text-[#1A3A5C]/55 text-lg max-w-xl mx-auto">Six things — that's all we need from Yahya to get this site built and launched.</p>
+    </div>
+
+    <div class="grid sm:grid-cols-2 gap-4">
+
+      <div class="card-lift reveal bg-white rounded-2xl p-6 border border-[#F5E6C8] flex items-start gap-4 cursor-default">
+        <div class="w-10 h-10 rounded-xl bg-[#C9A84C] flex items-center justify-center flex-shrink-0">
+          <i data-lucide="image" class="w-5 h-5 text-white"></i>
+        </div>
+        <div>
+          <h4 class="font-semibold text-[#1A3A5C] mb-1">Logo Files</h4>
+          <p class="text-[#1A3A5C]/55 text-sm">SVG or high-res PNG — the foundation of the entire visual identity.</p>
+        </div>
+      </div>
+
+      <div class="card-lift reveal bg-white rounded-2xl p-6 border border-[#F5E6C8] flex items-start gap-4 cursor-default">
+        <div class="w-10 h-10 rounded-xl bg-[#C9A84C] flex items-center justify-center flex-shrink-0">
+          <i data-lucide="camera" class="w-5 h-5 text-white"></i>
+        </div>
+        <div>
+          <h4 class="font-semibold text-[#1A3A5C] mb-1">Photos</h4>
+          <p class="text-[#1A3A5C]/55 text-sm">High-quality tour and Egypt location photos. We can source stock images if needed.</p>
+        </div>
+      </div>
+
+      <div class="card-lift reveal bg-white rounded-2xl p-6 border border-[#F5E6C8] flex items-start gap-4 cursor-default">
+        <div class="w-10 h-10 rounded-xl bg-[#C9A84C] flex items-center justify-center flex-shrink-0">
+          <i data-lucide="list" class="w-5 h-5 text-white"></i>
+        </div>
+        <div>
+          <h4 class="font-semibold text-[#1A3A5C] mb-1">Tour List &amp; Pricing</h4>
+          <p class="text-[#1A3A5C]/55 text-sm">All tours you offer — with descriptions, itineraries, inclusions, and prices.</p>
+        </div>
+      </div>
+
+      <div class="card-lift reveal bg-white rounded-2xl p-6 border border-[#F5E6C8] flex items-start gap-4 cursor-default">
+        <div class="w-10 h-10 rounded-xl bg-[#C9A84C] flex items-center justify-center flex-shrink-0">
+          <i data-lucide="mail" class="w-5 h-5 text-white"></i>
+        </div>
+        <div>
+          <h4 class="font-semibold text-[#1A3A5C] mb-1">Business Email</h4>
+          <p class="text-[#1A3A5C]/55 text-sm">The address that receives booking notifications and confirmation copies.</p>
+        </div>
+      </div>
+
+      <div class="card-lift reveal bg-white rounded-2xl p-6 border border-[#F5E6C8] flex items-start gap-4 cursor-default">
+        <div class="w-10 h-10 rounded-xl bg-[#C9A84C] flex items-center justify-center flex-shrink-0">
+          <i data-lucide="globe" class="w-5 h-5 text-white"></i>
+        </div>
+        <div>
+          <h4 class="font-semibold text-[#1A3A5C] mb-1">Domain Name</h4>
+          <p class="text-[#1A3A5C]/55 text-sm">e.g. yahyatours.com — we'll guide you through registering one if you don't have it yet.</p>
+        </div>
+      </div>
+
+      <div class="card-lift reveal bg-white rounded-2xl p-6 border border-[#F5E6C8] flex items-start gap-4 cursor-default">
+        <div class="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style="background:#25D366;">
+          <i data-lucide="message-circle" class="w-5 h-5 text-white"></i>
+        </div>
+        <div>
+          <h4 class="font-semibold text-[#1A3A5C] mb-1">WhatsApp Number</h4>
+          <p class="text-[#1A3A5C]/55 text-sm">Linked to a floating contact button that appears on every single page.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════
+     INVESTMENT
+═══════════════════════════════════════════════════ -->
+<section id="investment" class="py-28 px-6 bg-[#0A1E35]">
+  <div class="max-w-5xl mx-auto">
+
+    <div class="text-center mb-16 reveal">
+      <span class="inline-block px-4 py-1 rounded-full bg-[#C9A84C]/15 text-[#C9A84C] text-sm font-medium mb-4">Investment</span>
+      <h2 class="font-playfair text-4xl md:text-5xl font-bold text-white mb-4">Transparent Pricing</h2>
+      <p class="text-white/45 text-lg max-w-xl mx-auto">Two straightforward payments — one to build it, one to keep it running.</p>
+    </div>
+
+    <!-- Step 1 + Step 2 sequential layout -->
+    <div class="max-w-3xl mx-auto mb-10 space-y-5">
+
+      <!-- Step 1: Setup Fee -->
+      <div class="reveal bg-white/6 rounded-2xl p-8 border border-white/10">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-8 h-8 rounded-full bg-[#C9A84C] flex items-center justify-center flex-shrink-0">
+            <span class="text-white font-bold text-sm">1</span>
+          </div>
+          <div class="text-white/50 text-sm font-medium uppercase tracking-widest">Step 1 — Paid Once to Start</div>
+        </div>
+        <div class="flex flex-col gap-5">
+          <!-- Price row -->
+          <div>
+            <div class="text-white/40 text-sm mb-2">One-Time Setup Fee</div>
+            <div class="flex items-end gap-2">
+              <span class="font-playfair font-bold text-white" style="font-size:3rem;line-height:1;">35,000</span>
+              <span class="text-[#C9A84C] font-semibold text-xl mb-1">EGP</span>
+            </div>
+          </div>
+          <!-- Payment split -->
+          <div class="flex items-stretch gap-3">
+            <div class="flex-1 bg-white/8 rounded-xl p-3 text-center border border-white/10">
+              <div class="text-[#C9A84C] font-bold font-playfair text-base">17,500 EGP</div>
+              <div class="text-white/40 text-xs mt-0.5">50% — Before we start</div>
+            </div>
+            <div class="flex items-center text-white/20 font-light">+</div>
+            <div class="flex-1 bg-white/8 rounded-xl p-3 text-center border border-white/10">
+              <div class="text-[#C9A84C] font-bold font-playfair text-base">17,500 EGP</div>
+              <div class="text-white/40 text-xs mt-0.5">50% — Upon delivery</div>
+            </div>
+          </div>
+          <!-- Checklist -->
+          <ul class="space-y-2">
+            <li class="flex items-center gap-2 text-sm text-white/60">
+              <i data-lucide="check" class="w-4 h-4 text-[#C9A84C] flex-shrink-0"></i>
+              Complete design &amp; development
+            </li>
+            <li class="flex items-center gap-2 text-sm text-white/60">
+              <i data-lucide="check" class="w-4 h-4 text-[#C9A84C] flex-shrink-0"></i>
+              All pages + booking system + admin dashboard
+            </li>
+            <li class="flex items-center gap-2 text-sm text-white/60">
+              <i data-lucide="check" class="w-4 h-4 text-[#C9A84C] flex-shrink-0"></i>
+              SEO setup + deployed to your domain
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Arrow connector -->
+      <div class="flex justify-center reveal">
+        <div class="flex flex-col items-center gap-1 text-white/20">
+          <div class="w-px h-6 bg-white/15"></div>
+          <div class="flex items-center gap-2 text-xs text-white/30 font-medium uppercase tracking-widest">
+            <i data-lucide="arrow-down" class="w-4 h-4 text-[#C9A84C]"></i>
+            then, after go-live
+          </div>
+          <div class="w-px h-6 bg-white/15"></div>
+        </div>
+      </div>
+
+      <!-- Step 2: Monthly Retainer -->
+      <div class="reveal bg-[#C9A84C] rounded-2xl p-8">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-8 h-8 rounded-full bg-white/25 flex items-center justify-center flex-shrink-0">
+            <span class="text-white font-bold text-sm">2</span>
+          </div>
+          <div class="text-white/70 text-sm font-medium uppercase tracking-widest">Step 2 — Ongoing Monthly</div>
+        </div>
+        <div class="flex flex-col gap-5">
+          <div>
+            <div class="text-white/60 text-sm mb-2">Monthly Retainer</div>
+            <div class="flex items-end gap-2">
+              <span class="font-playfair font-bold text-white" style="font-size:3rem;line-height:1;">1,750</span>
+              <span class="text-white/80 font-semibold text-xl mb-1">EGP / mo</span>
+            </div>
+            <div class="text-white/50 text-xs mt-2">Starts the month the site goes live. Cancel anytime.</div>
+          </div>
+          <ul class="space-y-2">
+            <li class="flex items-center gap-2 text-sm text-white/90">
+              <i data-lucide="check" class="w-4 h-4 text-white flex-shrink-0"></i>
+              Hosting + performance monitoring
+            </li>
+            <li class="flex items-center gap-2 text-sm text-white/90">
+              <i data-lucide="check" class="w-4 h-4 text-white flex-shrink-0"></i>
+              Bug fixes + content updates
+            </li>
+            <li class="flex items-center gap-2 text-sm text-white/90">
+              <i data-lucide="check" class="w-4 h-4 text-white flex-shrink-0"></i>
+              Priority support — fast response
+            </li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Domain note -->
+    <div class="reveal flex items-start gap-3 bg-white/5 rounded-xl p-4 border border-white/8 mb-12">
+      <i data-lucide="info" class="w-4 h-4 text-[#C9A84C] flex-shrink-0 mt-0.5"></i>
+      <p class="text-white/40 text-sm">Domain registration (e.g. yahyatours.com) is ~$15/year, paid directly by you to the registrar. We'll walk you through it step by step.</p>
+    </div>
+
+    <!-- Add-ons -->
+    <div class="reveal">
+      <div class="flex items-center justify-center gap-3 mb-6">
+        <div class="h-px flex-1 max-w-[60px] bg-white/10"></div>
+        <p class="text-white/30 text-sm text-center uppercase tracking-widest font-medium">Available Add-ons</p>
+        <div class="h-px flex-1 max-w-[60px] bg-white/10"></div>
+      </div>
+      <p class="text-center text-white/30 text-xs mb-6 flex items-center justify-center gap-1.5">
+        <i data-lucide="plus-circle" class="w-3.5 h-3.5 text-[#C9A84C]"></i>
+        Not included in the base price — each add-on is quoted and billed separately
+      </p>
+      <div class="grid sm:grid-cols-3 gap-4">
+
+        <div class="bg-white/5 rounded-xl p-5 border border-white/8 cursor-default flex flex-col gap-3">
+          <div class="flex items-center justify-between">
+            <div class="w-9 h-9 rounded-lg bg-[#C9A84C]/10 flex items-center justify-center">
+              <i data-lucide="credit-card" class="w-4 h-4 text-[#C9A84C]"></i>
+            </div>
+            <span class="text-[#C9A84C] text-xs font-semibold bg-[#C9A84C]/10 px-2.5 py-1 rounded-full">+ Extra Fee</span>
+          </div>
+          <div>
+            <div class="text-white font-medium text-sm mb-1">Online Payments</div>
+            <div class="text-white/35 text-xs leading-relaxed">Accept bookings directly via Paymob or Stripe — fully integrated into the booking flow.</div>
+          </div>
+        </div>
+
+        <div class="bg-white/5 rounded-xl p-5 border border-white/8 cursor-default flex flex-col gap-3">
+          <div class="flex items-center justify-between">
+            <div class="w-9 h-9 rounded-lg bg-[#C9A84C]/10 flex items-center justify-center">
+              <i data-lucide="languages" class="w-4 h-4 text-[#C9A84C]"></i>
+            </div>
+            <span class="text-[#C9A84C] text-xs font-semibold bg-[#C9A84C]/10 px-2.5 py-1 rounded-full">+ Extra Fee</span>
+          </div>
+          <div>
+            <div class="text-white font-medium text-sm mb-1">Arabic Version</div>
+            <div class="text-white/35 text-xs leading-relaxed">Full bilingual site with RTL support — expands your reach to Arabic-speaking travelers.</div>
+          </div>
+        </div>
+
+        <div class="bg-white/5 rounded-xl p-5 border border-white/8 cursor-default flex flex-col gap-3">
+          <div class="flex items-center justify-between">
+            <div class="w-9 h-9 rounded-lg bg-[#C9A84C]/10 flex items-center justify-center">
+              <i data-lucide="rss" class="w-4 h-4 text-[#C9A84C]"></i>
+            </div>
+            <span class="text-[#C9A84C] text-xs font-semibold bg-[#C9A84C]/10 px-2.5 py-1 rounded-full">+ Extra Fee</span>
+          </div>
+          <div>
+            <div class="text-white font-medium text-sm mb-1">Travel Blog</div>
+            <div class="text-white/35 text-xs leading-relaxed">A content section for travel tips and Egypt guides — builds SEO authority over time.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════
+     WHY AQL
+═══════════════════════════════════════════════════ -->
+<section id="why" class="py-28 px-6 bg-[#FDFAF4]">
+  <div class="max-w-4xl mx-auto">
+
+    <div class="text-center mb-12 reveal">
+      <span class="inline-block px-4 py-1 rounded-full bg-[#F5E6C8] text-[#a88830] text-sm font-medium mb-4">Why Aql</span>
+      <h2 class="font-playfair text-4xl md:text-5xl font-bold text-[#1A3A5C]">More Than a Website</h2>
+    </div>
+
+    <div class="reveal bg-white rounded-2xl p-10 border border-[#F5E6C8]">
+      <div class="text-[#1A3A5C]/65 text-lg leading-relaxed space-y-5 mb-10">
+        <p>We've built digital products for businesses across Egypt. We know what it takes to turn a great idea into a platform that actually works — one that earns trust, drives conversions, and holds up under real-world use.</p>
+        <p>With Yahya Tours, we're not just building a website. We're building the first impression every potential tourist will have of your business. That impression has to be immaculate — because in tourism, the experience starts before they even arrive.</p>
+        <p class="font-playfair italic text-[#1A3A5C] text-xl">"Your tourists are searching for Egypt's best guide right now. Let's make sure they find you."</p>
+      </div>
+
+      <div class="border-t border-[#F5E6C8] pt-8 grid grid-cols-3 gap-2 sm:gap-4 text-center mb-10">
+        <div>
+          <div class="font-playfair text-3xl font-bold text-[#C9A84C] mb-1">100%</div>
+          <div class="text-[#1A3A5C]/45 text-sm">Mobile Responsive</div>
+        </div>
+        <div>
+          <div class="font-playfair text-3xl font-bold text-[#C9A84C] mb-1">90+</div>
+          <div class="text-[#1A3A5C]/45 text-sm">Target SEO Score</div>
+        </div>
+        <div>
+          <div class="font-playfair text-3xl font-bold text-[#C9A84C] mb-1">3</div>
+          <div class="text-[#1A3A5C]/45 text-sm">Phases to Launch</div>
+        </div>
+      </div>
+
+      <!-- Personal contact card -->
+      <div class="border-t border-[#F5E6C8] pt-8">
+        <p class="text-[#1A3A5C]/35 text-xs uppercase tracking-widest font-medium mb-5">Your Point of Contact</p>
+        <div class="bg-[#F5E6C8]/40 rounded-2xl p-6 flex items-center justify-between gap-4 border border-[#F5E6C8] flex-wrap sm:flex-nowrap">
+
+          <!-- Left: avatar + info -->
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 rounded-full bg-[#1A3A5C] flex items-center justify-center flex-shrink-0 ring-2 ring-[#C9A84C]/30">
+              <i data-lucide="user-round" class="w-6 h-6 text-[#C9A84C]"></i>
+            </div>
+            <div>
+              <div class="font-playfair font-bold text-[#1A3A5C] text-base leading-tight">Ahmed Ibrahim</div>
+              <div class="text-[#C9A84C] text-xs font-semibold uppercase tracking-wide mt-0.5">CEO, Aql</div>
+              <div class="text-[#1A3A5C]/40 text-xs mt-1">+20 100 231 1909</div>
+            </div>
+          </div>
+
+          <!-- Right: action buttons -->
+          <div class="flex items-center gap-2 flex-shrink-0">
+            <a href="https://wa.me/201002311909" target="_blank" rel="noopener noreferrer"
+               class="cursor-pointer w-11 h-11 rounded-xl flex items-center justify-center text-white transition-all hover:scale-105"
+               style="background:#25D366;" onmouseover="this.style.background='#1fb959'" onmouseout="this.style.background='#25D366'"
+               aria-label="WhatsApp">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="white" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            </a>
+            <a href="mailto:ahmed.ibrahim.elbahy@gmail.com"
+               class="cursor-pointer w-11 h-11 rounded-xl flex items-center justify-center bg-[#1A3A5C] hover:bg-[#0e2540] transition-all hover:scale-105"
+               aria-label="Email">
+              <i data-lucide="mail" class="w-5 h-5 text-[#C9A84C]"></i>
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════
+     FOOTER / CTA
+═══════════════════════════════════════════════════ -->
+<section id="cta" class="py-28 px-6 bg-[#1A3A5C]">
+  <div class="max-w-2xl mx-auto text-center reveal">
+
+    <p class="text-[#C9A84C] text-sm font-medium tracking-widest uppercase mb-5">Let's Build It Together</p>
+
+    <h2 class="font-playfair font-bold text-white mb-6 leading-tight" style="font-size:clamp(2rem,6vw,3.2rem);">
+      Ready to take<br>Yahya Tours online?
+    </h2>
+
+    <p class="text-white/45 text-lg mb-12">Egypt's next great tour operator deserves a world-class website. Let's get started.</p>
+
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
+      <a href="https://wa.me/201002311909" target="_blank" rel="noopener noreferrer"
+         class="cursor-pointer w-full sm:w-auto flex items-center justify-center gap-3 px-8 py-4 rounded-xl font-semibold text-white transition-colors"
+         style="background:#25D366;" onmouseover="this.style.background='#1fb959'" onmouseout="this.style.background='#25D366'">
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="white" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        WhatsApp Ahmed
+      </a>
+      <a href="mailto:ahmed.ibrahim.elbahy@gmail.com"
+         class="cursor-pointer w-full sm:w-auto flex items-center justify-center gap-3 px-8 py-4 rounded-xl font-medium text-white/70 border border-white/15 transition-all hover:border-[#C9A84C] hover:text-white">
+        <i data-lucide="mail" class="w-5 h-5"></i>
+        Send an Email
+      </a>
+    </div>
+
+    <!-- Instapay QR -->
+    <div class="mb-14">
+      <p class="text-white/30 text-xs uppercase tracking-widest font-medium mb-5">Pay via InstaPay</p>
+      <a href="https://ipn.eg/S/aql.ai/instapay/0Q6lpa" target="_blank" rel="noopener noreferrer"
+         class="cursor-pointer inline-block group" aria-label="Pay via InstaPay — aql.ai@instapay">
+        <div class="bg-white p-4 rounded-2xl inline-block shadow-xl group-hover:shadow-[0_0_32px_rgba(201,168,76,0.35)] transition-shadow">
+          <div id="instapay-qr"></div>
+        </div>
+        <p class="text-white/35 text-xs mt-3">aql.ai@instapay &nbsp;·&nbsp; Tap to open InstaPay</p>
+      </a>
+    </div>
+
+    <!-- Divider -->
+    <div class="flex items-center gap-5 justify-center mb-8">
+      <div class="h-px flex-1 bg-white/8"></div>
+      <span class="font-playfair italic text-[#C9A84C] text-sm">Yahya Tours</span>
+      <div class="h-px flex-1 bg-white/8"></div>
+    </div>
+
+    <p class="text-white/25 text-sm">Prepared by <span class="text-[#C9A84C]">Ahmed Ibrahim</span>, CEO at <span class="text-[#C9A84C]">Aql</span> &nbsp;&middot;&nbsp; &copy; 2026</p>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════
+     SCRIPTS
+═══════════════════════════════════════════════════ -->
+<script>
+  // ── Lucide icons ───────────────────────────────────
+  lucide.createIcons();
+
+  // ── InstaPay QR code ───────────────────────────────
+  new QRCode(document.getElementById('instapay-qr'), {
+    text: 'https://ipn.eg/S/aql.ai/instapay/0Q6lpa',
+    width: 160,
+    height: 160,
+    colorDark: '#1A3A5C',
+    colorLight: '#ffffff',
+    correctLevel: QRCode.CorrectLevel.H
+  });
+
+  // ── Star-field canvas in hero ──────────────────────
+  (function () {
+    const canvas = document.getElementById('stars');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    let stars = [];
+
+    function resize() {
+      canvas.width  = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+      buildStars();
+    }
+
+    function buildStars() {
+      stars = [];
+      const count = Math.floor((canvas.width * canvas.height) / 5000);
+      for (let i = 0; i < count; i++) {
+        stars.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          r: Math.random() * 1.2 + 0.2,
+          a: Math.random() * 0.6 + 0.15,
+        });
+      }
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      stars.forEach(s => {
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255,255,255,${s.a})`;
+        ctx.fill();
+      });
+    }
+
+    const resizeObserver = new ResizeObserver(resize);
+    resizeObserver.observe(canvas.parentElement);
+    resize();
+    draw();
+  })();
+
+  // ── Scroll reveal (Intersection Observer) ─────────
+  const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target); // fire once
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+  revealEls.forEach((el, i) => {
+    // Stagger siblings within a common parent grid/list
+    const siblings = el.parentElement
+      ? Array.from(el.parentElement.querySelectorAll('.reveal, .reveal-left, .reveal-right'))
+      : [];
+    const idx = siblings.indexOf(el);
+    if (idx > 0) el.style.transitionDelay = `${idx * 0.075}s`;
+    revealObserver.observe(el);
+  });
+
+  // ── Navbar scroll effect ───────────────────────────
+  const navbar = document.getElementById('navbar');
+  const onScroll = () => {
+    if (window.scrollY > 72) {
+      navbar.style.backgroundColor = 'rgba(10,30,53,0.94)';
+      navbar.style.backdropFilter  = 'blur(14px)';
+      navbar.style.boxShadow       = '0 1px 24px rgba(0,0,0,0.35)';
+    } else {
+      navbar.style.backgroundColor = 'transparent';
+      navbar.style.backdropFilter  = 'none';
+      navbar.style.boxShadow       = 'none';
+    }
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  // ── Mobile menu ────────────────────────────────────
+  const menuBtn    = document.getElementById('menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+  mobileMenu.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+  });
+
+  // ── Smooth scroll for all # links ─────────────────
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (!target) return;
+      e.preventDefault();
+      const offset = 72; // navbar height
+      const top = target.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top, behavior: 'smooth' });
+    });
+  });
+</script>
+
+</body>
+</html>
