@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python scripts/search.py \"tourism travel egypt landing page proposal elegant premium\" --design-system -p \"Yahya Tours Proposal\" -f markdown)",
+      "Bash(python scripts/search.py \"landing page hero timeline pricing scroll animation\" --domain landing -n 5)",
+      "Bash(python scripts/search.py \"animation scroll-reveal intersection observer\" --domain ux -n 3)",
+      "Bash(gh auth:*)",
+      "Bash(vercel whoami:*)",
+      "Bash(git config:*)",
+      "Bash(gh repo:*)"
+    ]
+  }
+}
